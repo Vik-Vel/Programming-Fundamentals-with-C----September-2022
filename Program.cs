@@ -1,33 +1,24 @@
 ﻿using System;
+using System.Globalization;
 
-namespace _01._Ages
+class HolidaysBetweenTwoDates
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        var startDate = DateTime.ParseExact(Console.ReadLine(),
+             "d.M.yyyy", CultureInfo.CurrentCulture);
+        var endDate = DateTime.ParseExact(Console.ReadLine(),
+               "d.M.yyyy", CultureInfo.CurrentCulture);
+        var holidaysCount = 0;
+        for (var date = startDate; date <= endDate; date = date.AddDays(1))
         {
-            int input = int.Parse(Console.ReadLine());
+            if (date.DayOfWeek == DayOfWeek.Saturday ||
+                date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                holidaysCount++;
 
-            if (input <= 2)
-            {
-                Console.WriteLine("baby");
-            }
-            else if (input <= 13)
-            {
-                Console.WriteLine("child");
-            }
-            else if (input <= 19)
-            {
-                Console.WriteLine("teenager");
-            }
-            else if (input <= 65)
-            {
-                Console.WriteLine("adult");
-            }
-            else if (input >= 65)
-            {
-                Console.WriteLine("elder");
             }
         }
+        Console.WriteLine(holidaysCount);
     }
 }
